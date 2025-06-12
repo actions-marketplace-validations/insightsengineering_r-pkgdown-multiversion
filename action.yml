@@ -82,12 +82,18 @@ runs:
         then {
           rm -rf ${{ inputs.latest-tag-alt-name }}
           cp -r latest-tag ${{ inputs.latest-tag-alt-name }}
+          perl -p -i -e \
+            "s@latest-tag@${{ inputs.latest-tag-alt-name }}@g" \
+            ${{ inputs.latest-tag-alt-name }}/search.json
         }
         fi
         if [[ "${{ inputs.release-candidate-alt-name }}" != "" && -d release-candidate ]]
         then {
           rm -rf ${{ inputs.release-candidate-alt-name }}
           cp -r release-candidate ${{ inputs.release-candidate-alt-name }}
+          perl -p -i -e \
+            "s@release-candidate@${{ inputs.release-candidate-alt-name }}@g" \
+            ${{ inputs.release-candidate-alt-name }}/search.json
         }
         fi
       shell: bash
